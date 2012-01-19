@@ -31,7 +31,7 @@
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
                                                                                             
                                                                                             [_tweets removeAllObjects];
-                                                                                            NSArray *tweetsJSON = [self __response:JSON];
+                                                                                            NSArray *tweetsJSON = JSON;
                                                                                             for (id tweetJSON in tweetsJSON) {
                                                                                                 [_tweets addObject:[Tweet tweetWithJSON:tweetJSON]];
                                                                                             }
@@ -56,7 +56,7 @@
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON){
                                                                                             
                                                                                             [_tweets removeAllObjects];
-                                                                                            NSArray *tweetsJSON = [[self __response:JSON] objectForKey:@"results"];
+                                                                                            NSArray *tweetsJSON = [JSON objectForKey:@"results"];
                                                                                             for (id tweetJSON in tweetsJSON) {
                                                                                                 if([_tweets count] == 20){
                                                                                                     break;
@@ -85,22 +85,22 @@
     return [_tweets objectAtIndex:indexPath.row];
 }
 
-- (void)__setMockResponse:(id)response
-{
-    if(__mockResponse){
-        [__mockResponse release];
-    }
-    __mockResponse = [response retain];
-}
-
-- (id)__response:(id)response
-{
-    if(__mockResponse){
-        return __mockResponse;
-    }
-    
-    return response;
-}
+//- (void)__setMockResponse:(id)response
+//{
+//    if(__mockResponse){
+//        [__mockResponse release];
+//    }
+//    __mockResponse = [response retain];
+//}
+//
+//- (id)__response:(id)response
+//{
+//    if(__mockResponse){
+//        return __mockResponse;
+//    }
+//    
+//    return response;
+//}
 
 - (void)dealloc
 {
